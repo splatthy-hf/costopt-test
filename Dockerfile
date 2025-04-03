@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mkdir -p /app/.aws/sso/cache
+RUN mkdir -p /tmp/.aws/sso/cache
 
 RUN apt-get update && apt-get install -y \
     build-essential \

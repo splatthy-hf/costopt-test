@@ -18,6 +18,7 @@ st.set_page_config(page_title="Cost Management Working Portal", layout="wide")
 """
 sso_login(webui=True)
 
+st.write(codp.S3_TRACKER_INPROGRESS)
 # Will need to write custom code to ingest S3 parquet, and write back edited data frames
 
 # conn = st.connection('s3', type=FilesConnection,)
@@ -36,10 +37,10 @@ if "tracker_df" not in st.session_state:
 if "ctracker_df" not in st.session_state:
     st.session_state.ctracker_df = codp.ingest_tracker(
         tracker_type="complete", s3=True)
-    
+
 if "extracker_df" not in st.session_state:
     st.session_state.ctracker_df = codp.ingest_tracker(
-        tracker_type="exempt", s3=True)    
+        tracker_type="exempt", s3=True)
 
 chub_button = st.button(
     "Load Cost Optimization Hub Findings",

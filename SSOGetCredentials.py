@@ -23,7 +23,7 @@ import boto3
 import streamlit as st
 
 START_URL = 'https://d-90670a4e60.awsapps.com/start'
-SSO_DIR = os.path.expanduser('/tmp/.aws/sso/cache')
+SSO_DIR = os.path.expanduser('~/.aws/sso/cache')
 CACHE = hashlib.sha1(START_URL.encode("utf-8")).hexdigest()
 
 PATH = f'{SSO_DIR}/{CACHE}.json'

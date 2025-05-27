@@ -69,6 +69,7 @@ DF_TYPE_DICT = {
     "Resource ID + Type": str,
 }
 
+
 def parse_findings(aggs, itemlist):
     """
     Parses and processes a list of findings, enriching them with additional information and status.
@@ -189,6 +190,7 @@ def parse_findings(aggs, itemlist):
 
         aggs.append(agg.copy())
     return aggs
+
 
 def parse_findings_chunk(args):
     """'
@@ -317,6 +319,7 @@ def split_inprogress_complete(df):
     #    cdf = cdf.replace({np.nan: None})
     return idf, cdf
 
+
 def ingest_tracker(tracker_type="inprogress", s3=False):
     """
     Reads and processes the Cost Tracker data from either local Excel file or S3.
@@ -355,11 +358,11 @@ def ingest_tracker(tracker_type="inprogress", s3=False):
             s3_client.download_file(
                 S3_BUCKET, S3_TRACKER_COMPLETE, TMP_TRACKER_COMPLETE
             )
-            df = pd.read_parquet(TMP_TRACKER_COMPLETE)            
+            df = pd.read_parquet(TMP_TRACKER_COMPLETE)
         elif tracker_type == "exempt":
             s3_client.download_file(
                 S3_BUCKET, S3_TRACKER_EXEMPT, TMP_TRACKER_EXEMPT
-            )            
+            )
             df = pd.read_parquet(TMP_TRACKER_EXEMPT)
     return df
 
@@ -404,7 +407,7 @@ def modify_inprogress_tracker():
         elif ss.tracker_df.loc[index, "FinOpsStatus"].lower() == "exempt":
             s3_ex_df.loc[len(s3_ex_df)] = ss.tracker_df.loc[index]
             st.write(f"Dropping the following Row: {s3_i_df.loc[index]}")
-            s3_i_df = s3_i_df.drop([index])            
+            s3_i_df = s3_i_df.drop([index])
         elif ss.tracker_df.loc[index, "FinOpsStatus"] == "DeleteMe":
             st.write(f"Dropping the following Row: {s3_i_df.loc[index]}")
             s3_i_df = s3_i_df.drop([index])
@@ -454,6 +457,7 @@ def modify_complete_tracker():
             s3_c_df = s3_c_df.drop([index])
     write_tracker(s3_c_df, tracker_type="complete", s3=True)
     return unwritten_indexes
+
 
 def modify_exempt_tracker():
     """

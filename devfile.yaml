@@ -12,7 +12,7 @@ metadata:
 components:
   - name: runtime
     container:
-      image: registry.access.redhat.com/ubi9/python-39:1-1739420387
+      image: healthfirstdocker/costoptstreamlitodo:latest
       endpoints:
         - name: http-8601
           targetPort: 8601

@@ -15,51 +15,6 @@ metadata:
 components:
   - name: py
     container:
-<<<<<<< Updated upstream
-      image: healthfirstdocker/costoptstreamlitodo:latest
-      endpoints:
-        - name: http-8601
-          targetPort: 8601
-  # This will build the container image before deployment
-
-commands:
-# - id: apt-get
-#   exec:
-#     commandLine: sudo apt-get update && sudo apt-get install -y build-essential curl ca-certificates software-properties-common git && rm -rf /var/lib/apt/lists/*
-#     component: runtime
-#     group:
-#       kind: build
-#       isDefault: true
- - id: pip
-   exec:
-     commandLine: pip3 install -r requirements.txt
-     component: runtime
-     workingDir: ${PROJECT_SOURCE}
-     group:
-       kind: build
-       isDefault: true
- - id: ssocache
-   exec:
-     commandLine: mkdir -p /tmp/.aws/sso/cache
-     component: runtime
-     group:
-       kind: build
- - id: package
-   composite:
-    commands:
-#      - apt-get
-      - pip
-      - ssocache
-    parallel: false
- - id: run
-   exec:
-    commandLine: streamlit run HF_CostOpt_Home.py --server.port=8601 --server.address=0.0.0.0
-    component: runtime
-    workingDir: ${PROJECT_SOURCE}
-    group:
-      isDefault: true
-      kind: run
-=======
       image: registry.access.redhat.com/ubi9/python-39:1-1743091356
       args:
         - tail
@@ -106,4 +61,3 @@ starterProjects:
     git:
       remotes:
         origin: https://github.com/devfile-samples/python-ex
->>>>>>> Stashed changes
